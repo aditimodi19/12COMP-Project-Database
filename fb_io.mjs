@@ -5,7 +5,7 @@
 //
 // All variables & function begin with fb_  all const with FB_
 // Diagnostic code lines have a comment appended to them //DIAG
-/**************************************************************/
+/**************************** **********************************/
 const COL_C = 'white';	    // These two const are part of the coloured 	
 const COL_B = '#CD7F32';	//  console.log for functions scheme
 console.log('%c fb_io.mjs',
