@@ -12,15 +12,14 @@ console.log('%c fb_io.mjs',
     'color: blue; background-color: white;');
 
 var FB_GAMEDB;
-var FB_GAMEDB;
 var FB_GAMEAUTH;
 
 let userDetails = {
-    displayName:'n/a',
-    email:'n/a',
+    displayName: 'n/a',
+    email: 'n/a',
     photoURL: 'n/a',
-    uid:'n/a' };
-
+    uid: 'n/a'
+};
 
 /**************************************************************/
 // Import all external constants & functions required
@@ -34,7 +33,7 @@ import { getDatabase, ref, set, get, update}
     from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
     
-import { getAuth, GoogleAuthProvider, signInWithPopup, }
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut }
     from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
 /**************************************************************/
@@ -42,9 +41,10 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, }
 // List all the functions called by code or html outside of this module
 /**************************************************************/
 export { 
-    fb_initialise, fb_authenticate, fb_detectLogin };
+    fb_initialise, fb_authenticate, fb_detectLogin, fb_logout,
+    fb_writerecord, fb_readrecord };
 
- /******************************************************/
+/******************************************************/
 // fb_initialise()
 // Called by html initialise button
 // Input:  n/a
@@ -72,7 +72,6 @@ function fb_initialise() {
     console.info(FB_GAMEDB);      	//DIAG
 }
 
-
 /******************************************************/
 // fb_login()
 // Called by html authenticate button
@@ -84,36 +83,125 @@ function fb_authenticate() {
     console.log('%c fb_authenticate(): ', 
        'color: ' + COL_C + '; background-color: ' + COL_B + ';');
       
-     const AUTH = getAuth();
+    const AUTH = getAuth();
     const PROVIDER = new GoogleAuthProvider();
 
     PROVIDER.setCustomParameters({
         prompt: 'select_account'
     });
 
-      signInWithPopup(AUTH, PROVIDER).then((result) => {
-        // Code for a successful authentication goes here
-        console.log('%c fb_authenticate():successful! ', 
-            'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+      signInWithPopup(AUTH, PROVIDER)
+      .then((result) => {
+        // Code for a successful authentication
+        
         userDetails.displayName = result.user.displayName;
         userDetails.email = result.user.email;
         userDetails.photoURL = result.user.photoURL;
         userDetails.uid = result.user.uid;
-
-            console.log(userDetails);
-            console.table(userDetails);
-
-             window.location.href = "select_game.html";
+        console.log(userDetails); //DIAG
+         
+        
+        //sessionStorage.setItem
+        sessionStorage.setItem('displayName', userDetails.displayName );
+        sessionStorage.setItem('email',  userDetails.email );
+        sessionStorage.setItem('photoURL', userDetails.photoURL );
+        sessionStorage.setItem('uid', userDetails.uid );
         })
-        .catch((error) => {
+
+        const dbReference = ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
+    get(dbReference)
+    .then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+        console.log(fb_data);
+        // Successful read for USERDETAILS
+        
+/******************************************************/
+
+// READ ADMIN
+    const dbReference = ref(FB_GAMEDB, 'admin/' + userDetails.uid);
+    get(dbReference)
+    .then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+        console.log(fb_data);
+
+        // Successful read for ADMIN
+      sessionStorage.setItem('admin', 'your a admin');
+      window.location.href = "select_game.html";
+        }
+        else {
+        // Successful read but no REC found for ADMIN
+        sessionStorage.setItem('admin', 'your not a admin');
+        window.location.href = 'select_game.html';
+        }
+    })
+
+      .catch((error) => {
+        // Read error for ADMIN
+        console.log(error);
+    });
+    
+    /******************************************************/
+    }
+        else {
+        // Successful read but then NO rec found for USERDETAILS
+        window.location.href = 'reg.html';
+        }
+      })
+
+    .catch((error) => {
+    // Read error for USERDETAILS
+    console.log(error);
+    });
+
+    
+/******************************************************/
+// Read admin
+    const dbReference= ref(FB_GAMEDB, 'admin/' + userDetails.uid);
+    get(dbReference)
+    .then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+        console.log(fb_data);
+
+        // Successful read for ADMIN
+      sessionStorage.setItem('admin', 'your a admin');
+      window.location.href = "select_game.html";
+        }
+        else {
+        // Successful read but no REC found for ADMIN
+        sessionStorage.setItem('admin', 'your not a admin');
+        window.location.href = "select_game.html";
+        }
+    })
+    .catch((error) => {
+        // Read error for ADMIN
+        console.log(error);
+    });
+
+    
+       
+
+
+
+
+            .catch((error) => {
+        // Authentication error
             console.log(error);
         });
     }
+    
+        
+
+
+
+
 
 /******************************************************/
 // fb_detectLogin()
-// Called by html detect login change button
-// Login to Firebase via Google authentication
+// Called by html DETECT LOGIN change button
+// Detect changes to user authentication
 // Input:  n/a
 // Return: n/a
 /******************************************************/
@@ -127,17 +215,99 @@ function fb_detectLogin() {
     onAuthStateChanged(AUTH, (user) => {
     if (user) {
     // Code for user logged in goes here
-    console.log('%c fb_detectLogin(): logged in', 
+    console.log('%c fb_detectLogin(): logged IN', 
         'color: ' + COL_C + '; background-color: ' + COL_B + ';');
     } else {
 
     // Code for user logged out goes here
-    console.log('%c fb_detectLogin(): logged out', 
-    'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+    console.log('%c fb_detectLogin(): logged OUT', 
+        'color: ' + COL_C + '; background-color: ' + COL_B + ';');
     }
-    }, (error) => {
+    console.log('%c fb_detectLogin(): ' + fb_userLogin, 
+                'color: ' + COL_C + '; background-color: ' + COL_B + ';'); 
+    },
+
+    (error) => {
     // Code for an onAuthStateChanged error goes here
     console.log(error);
     });
 }
+
+/******************************************************/
+// fb_logout()
+// Called by html logout button
+// Logout of firebase
+// Input:  n/a
+// Return: n/a
+/******************************************************/
+function fb_logout() {
+    console.log('%c fb_logout(): ', 
+        'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+
+    const AUTH = getAuth();
+    signOut(AUTH)
+    .then(() => {
+
+    // Code for a successful logout
+    console.log('%c fb_logout(): logout successful', 'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+    })
+    .catch((error) => {
+    // Code for a logout error
+    console.log(error);
+    });
+ }
+
+ /******************************************************/
+// fb_writerecord()
+// Called by html write record 
+// Write a specific record to the DB
+// Input:  path and key to write to and the data to write 
+// Return: n/a
+/******************************************************/
+function fb_writerecord() {
+    console.log('%c fb_writerecord(): ', 
+        'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+
+    const dbReference= ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
+    set(dbReference, userDetails).then(() => {
+        // Code for a successful write goes here
+        console.log('%c fb_writerecord():successful! ', 
+            'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+    }).catch((error) => {
+        // Code for a write error goes here
+        console.log(error);
+    });
+}
+
+/******************************************************/
+// fb_readrecord()
+// Called by html read record button
+// Read a specific DB record
+// Input:  path and key of rec to read
+// Return: n/a
+/******************************************************/
+function fb_readrecord() {
+    console.log('%c fb_readrecord(): ', 
+        'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+
+    const dbReference= ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
+    get(dbReference).then((snapshot) => {
+        var fb_data = snapshot.val();
+        if (fb_data != null) {
+        console.log(fb_data);
+
+        // Code for a successful read goes here
+        console.log('%c fb_readrecord(): successful!', 
+            'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+
+        } else {
+            //Code for no record found goes here
+            console.log('no record found');
+        }
+    }).catch((error) => {
+        // Code for a read error goes here
+        console.log(error);
+    });
+}
+
 
