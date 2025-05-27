@@ -119,8 +119,8 @@ function fb_authenticate() {
 /******************************************************/
 
 // READ ADMIN
-    const dbReference = ref(FB_GAMEDB, 'admin/' + userDetails.uid);
-    get(dbReference)
+    const admindbReference = ref(FB_GAMEDB, 'admin/' + userDetails.uid);
+    get(admindbReference)
     .then((snapshot) => {
         var fb_data = snapshot.val();
         if (fb_data != null) {
@@ -158,8 +158,8 @@ function fb_authenticate() {
     
 /******************************************************/
 // Read admin
-    const dbReference= ref(FB_GAMEDB, 'admin/' + userDetails.uid);
-    get(dbReference)
+    const admindbReference= ref(FB_GAMEDB, 'admin/' + userDetails.uid);
+    get(admindbReference)
     .then((snapshot) => {
         var fb_data = snapshot.val();
         if (fb_data != null) {
@@ -179,25 +179,8 @@ function fb_authenticate() {
         // Read error for ADMIN
         console.log(error);
     });
-
+}
     
-       
-
-
-
-
-            .catch((error) => {
-        // Authentication error
-            console.log(error);
-        });
-    }
-    
-        
-
-
-
-
-
 /******************************************************/
 // fb_detectLogin()
 // Called by html DETECT LOGIN change button
