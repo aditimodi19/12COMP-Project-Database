@@ -16,4 +16,49 @@
 <!--*************************************************************
   BODY
 **************************************************************-->
-<h1> Registration form </h1>
+
+
+<h2 style="text-align: center; font-size: 40px; font-family: Copperplate, 'Copperplate Gothic Light', fantasy, serif;">
+  <body style="height: 550px; margin: 0; background: linear-gradient(135deg,#97c2f0 , #d197f0); background-size: cover; background-repeat: no-repeat;">
+
+  REGISTRATION FORM! 
+  </h2>
+<h3> please enter in your details </h3>
+
+<form id="f_userDetails" onsubmit="return false;">
+  <label for="i_username">Username:</label><br>
+  <input type="text" id="i_username" name="i_username" required><br>
+
+  <label for="i_password">Password:</label><br>
+  <input type="password" id="i_password" name="i_password" required><br><br>
+
+<button onclick="getUserInput()" style="font-size: 20px; padding: 15px 40px;">
+  REGISTER
+</button>
+</form>
+
+
+  <script>
+function getUserInput() {
+ 	console.log('getUserInput()');
+
+  // Check if form is valid
+  if (document.getElementById('f_userDetails').checkValidity()) {
+    // Get values from the form
+    const username = document.getElementById("i_username").value;
+    const password = document.getElementById("i_password").value;
+
+    
+    console.log("Username:", username);
+    console.log("Password:", password);
+  } else {
+    console.log("Form is not valid!");
+  }
+}
+  </script>
+
+
+
+</body>
+
+</html>

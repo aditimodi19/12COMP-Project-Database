@@ -33,7 +33,7 @@ import { getDatabase, ref, set, get, update}
     from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
     
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut }
+import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
     from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
 /**************************************************************/
@@ -90,35 +90,32 @@ function fb_authenticate() {
         prompt: 'select_account'
     });
 
-      signInWithPopup(AUTH, PROVIDER)
-      .then((result) => {
+    signInWithPopup(AUTH, PROVIDER)
+    .then((result) => {
         // Code for a successful authentication
-        
+
         userDetails.displayName = result.user.displayName;
         userDetails.email = result.user.email;
         userDetails.photoURL = result.user.photoURL;
         userDetails.uid = result.user.uid;
         console.log(userDetails); //DIAG
-         
-        
-        //sessionStorage.setItem
+
+         //sessionStorage.setItem (store session data)
         sessionStorage.setItem('displayName', userDetails.displayName );
         sessionStorage.setItem('email',  userDetails.email );
         sessionStorage.setItem('photoURL', userDetails.photoURL );
         sessionStorage.setItem('uid', userDetails.uid );
-        })
 
         const dbReference = ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
-    get(dbReference)
-    .then((snapshot) => {
-        var fb_data = snapshot.val();
-        if (fb_data != null) {
-        console.log(fb_data);
-        // Successful read for USERDETAILS
-        
-/******************************************************/
+        get(dbReference)
+        .then((snapshot) => {
+            var fb_data = snapshot.val();
+            if (fb_data != null) {
+            console.log(fb_data);
+            // Successful read for USERDETAILS
 
-// READ ADMIN
+/******************************************************/
+// READ ADMIN (registered user, now check for admin)
     const admindbReference = ref(FB_GAMEDB, 'admin/' + userDetails.uid);
     get(admindbReference)
     .then((snapshot) => {
@@ -126,61 +123,39 @@ function fb_authenticate() {
         if (fb_data != null) {
         console.log(fb_data);
 
-        // Successful read for ADMIN
-      sessionStorage.setItem('admin', 'your a admin');
-      window.location.href = "select_game.html";
-        }
-        else {
-        // Successful read but no REC found for ADMIN
-        sessionStorage.setItem('admin', 'your not a admin');
-        window.location.href = 'select_game.html';
-        }
-    })
+            // Successful read for ADMIN
+        sessionStorage.setItem('admin', 'your a admin');
+        window.location.href = "select_game.html";
+            }
+            else {
+            // Successful read but no REC found for ADMIN
+            sessionStorage.setItem('admin', 'your not a admin');
+            window.location.href = 'select_game.html';
+                }
+        })
 
-      .catch((error) => {
+        .catch((error) => {
         // Read error for ADMIN
-        console.log(error);
-    });
-    
-    /******************************************************/
+            console.log(error);
+     });
+
+/******************************************************/
     }
-        else {
+         else {
         // Successful read but then NO rec found for USERDETAILS
         window.location.href = 'reg.html';
-        }
-      })
+            }
+        })
 
-    .catch((error) => {
-    // Read error for USERDETAILS
-    console.log(error);
-    });
-
-    
-/******************************************************/
-// Read admin
-    const admindbReference= ref(FB_GAMEDB, 'admin/' + userDetails.uid);
-    get(admindbReference)
-    .then((snapshot) => {
-        var fb_data = snapshot.val();
-        if (fb_data != null) {
-        console.log(fb_data);
-
-        // Successful read for ADMIN
-      sessionStorage.setItem('admin', 'your a admin');
-      window.location.href = "select_game.html";
-        }
-        else {
-        // Successful read but no REC found for ADMIN
-        sessionStorage.setItem('admin', 'your not a admin');
-        window.location.href = "select_game.html";
-        }
-    })
-    .catch((error) => {
-        // Read error for ADMIN
+        .catch((error) => {
+            // Read error for USERDETAILS
         console.log(error);
-    });
+        });
+
+    })
+
 }
-    
+
 /******************************************************/
 // fb_detectLogin()
 // Called by html DETECT LOGIN change button
