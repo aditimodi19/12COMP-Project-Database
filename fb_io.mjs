@@ -106,6 +106,8 @@ function fb_authenticate() {
         sessionStorage.setItem('photoURL', userDetails.photoURL );
         sessionStorage.setItem('uid', userDetails.uid );
 
+        fb_writerecord();
+
         const dbReference = ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
         get(dbReference)
         .then((snapshot) => {
@@ -231,11 +233,14 @@ function fb_writerecord() {
         // Code for a successful write goes here
         console.log('%c fb_writerecord():successful! ', 
             'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+
+    //redirect them to select_game.html after registration
+     window.location.href = 'select_game.html';
     }).catch((error) => {
-        // Code for a write error goes here
         console.log(error);
     });
 }
+
 
 /******************************************************/
 // fb_readrecord()
