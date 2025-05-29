@@ -26,13 +26,20 @@
 <h3> please enter in your details </h3>
 
 <form id="f_userDetails" onsubmit="return false;">
-  <label for="i_username">Username:</label><br>
-  <input type="text" id="i_username" name="i_username" required><br>
+  <label for="i_displayName">displayName:</label><br>
+  <input type="text" id="i_displayName" name="i_displayName" required><br>
 
-  <label for="i_password">Password:</label><br>
-  <input type="password" id="i_password" name="i_password" required><br><br>
+   <label for="i_age">Age:</label><br>
+  <input type="text" id="i_age" name="i_age" required><br>
 
-<button onclick="getUserInput()" style="font-size: 20px; padding: 15px 40px;">
+   <label for="i_username">Sex:</label><br>
+  <input type="text" id="i_sex" name="i_sex" required><br>
+
+    <label for="i_email">Email:</label><br>
+  <input type="text" id="i_email" name="i_email" required><br>
+  
+
+<button onclick="getUserInput()" style="font-size: 20px; padding: 15px 40px;  margin-top: 50px;">
   REGISTER
 </button>
 </form>
@@ -45,13 +52,17 @@ function getUserInput() {
   // Check if form is valid
   if (document.getElementById('f_userDetails').checkValidity()) {
     // Get values from the form
-    const username = document.getElementById("i_username").value;
-    const password = document.getElementById("i_password").value;
+    const displayName = document.getElementById("i_displayName").value;
+    const age = document.getElementById("i_age").value;
+    const sex = document.getElementById("i_sex").value;
+    const email = document.getElementById("i_email").value;
 
-    
-    console.log("Username:", username);
-    console.log("Password:", password);
-  } else {
+
+    console.log("displayName:", displayName);
+    console.log("Age:", age);
+    console.log("Sex:", sex);
+    console.log("Email:", email);
+    } else {
     console.log("Form is not valid!");
   }
 }
