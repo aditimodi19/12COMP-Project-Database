@@ -18,7 +18,9 @@ let userDetails = {
     displayName: 'n/a',
     email: 'n/a',
     photoURL: 'n/a',
-    uid: 'n/a'
+    uid: 'n/a',
+    age: 'n/a',
+    sex: 'n/a'
 };
 
 /**************************************************************/
@@ -42,7 +44,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 /**************************************************************/
 export { 
     fb_initialise, fb_authenticate, fb_detectLogin, fb_logout,
-    fb_writerecord, fb_readrecord };
+    fb_writerecord, fb_readrecord, userDetails }; 
 
 /******************************************************/
 // fb_initialise()
@@ -106,15 +108,15 @@ function fb_authenticate() {
         sessionStorage.setItem('photoURL', userDetails.photoURL );
         sessionStorage.setItem('uid', userDetails.uid );
 
-        fb_writerecord();
+       
 
         const dbReference = ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
         get(dbReference)
         .then((snapshot) => {
             var fb_data = snapshot.val();
             if (fb_data != null) {
-            console.log(fb_data);
-            // Successful read for USERDETAILS
+                console.log(fb_data);
+                // Successful read for USERDETAILS
 
 /******************************************************/
 // READ ADMIN (registered user, now check for admin)
@@ -141,21 +143,19 @@ function fb_authenticate() {
             console.log(error);
      });
 
-/******************************************************/
-    }
-         else {
-        // Successful read but then NO rec found for USERDETAILS
-        window.location.href = 'reg.html';
-            }
-        })
+    /******************************************************/
+        }
+        else {
+            // Successful read but then NO rec found for USERDETAILS
+            window.location.href = 'reg.html';
+        }
+    })
 
         .catch((error) => {
             // Read error for USERDETAILS
-        console.log(error);
+             console.log(error);
         });
-
     })
-
 }
 
 /******************************************************/
@@ -224,22 +224,21 @@ function fb_logout() {
 // Input:  path and key to write to and the data to write 
 // Return: n/a
 /******************************************************/
-function fb_writerecord() {
+function fb_writerecord(userDetails) {
     console.log('%c fb_writerecord(): ', 
         'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 
-    const dbReference= ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
+    const dbReference = ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
     set(dbReference, userDetails).then(() => {
-        // Code for a successful write goes here
-        console.log('%c fb_writerecord():successful! ', 
+        console.log('%c fb_writerecord(): successful! ', 
             'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 
-    //redirect them to select_game.html after registration
-     window.location.href = 'select_game.html';
+        window.location.href = 'select_game.html';
     }).catch((error) => {
         console.log(error);
     });
 }
+
 
 
 /******************************************************/
