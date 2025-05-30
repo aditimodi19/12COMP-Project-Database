@@ -41,7 +41,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 /**************************************************************/
 // EXPORT FUNCTIONS
 // List all the functions called by code or html outside of this module
-/**************************************************************/
+/*************************4*************************************/
 export { 
     fb_initialise, fb_authenticate, fb_detectLogin, fb_logout,
     fb_writerecord, fb_readrecord, userDetails }; 
@@ -108,7 +108,7 @@ function fb_authenticate() {
         sessionStorage.setItem('photoURL', userDetails.photoURL );
         sessionStorage.setItem('uid', userDetails.uid );
 
-       
+         //fb_writerecord();
 
         const dbReference = ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
         get(dbReference)
@@ -238,8 +238,6 @@ function fb_writerecord(userDetails) {
         console.log(error);
     });
 }
-
-
 
 /******************************************************/
 // fb_readrecord()
