@@ -37,8 +37,8 @@ function getUserInput() {
     }
 }
     
-  // Attach event listener to button
-  document.getElementById('registerBtn').addEventListener('click', getUserInput);
+document.getElementById('registerBtn').onclick = getUserInput;
+
   
 
 

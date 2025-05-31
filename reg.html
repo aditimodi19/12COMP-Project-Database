@@ -22,25 +22,31 @@
 <h2 style="text-align: center; font-size: 40px; font-family: Copperplate, 'Copperplate Gothic Light', fantasy, serif;">
   REGISTRATION FORM!
 </h2>
-<h3> please enter in your details </h3>
 
-<form id="f_userDetails" onsubmit="return false;">
-  <label for="i_displayName">displayName:</label><br/>
-  <input type="text" id="i_displayName" name="i_displayName" required /><br />
+ <div style="position: absolute; top: 90px; left: 390px; font-size: 40px; 
+ font-family: Copperplate, 'Copperplate Gothic Light', fantasy, serif;">
+  Please enter in your details
+</div>
 
-  <label for="i_age">Age:</label><br />
-  <input type="text" id="i_age" name="i_age" required /><br />
+<div style="position: absolute; left: 40px; top: 129px; max-width: 300px; font-size: 20px;">
+  <form id="f_userDetails" onsubmit="return false;">
+  <label for="i_displayName">displayName:</label><br>
+  <input type="text" id="i_displayName" name="i_displayName"><br>
 
-  <label for="i_sex">Sex:</label><br />
-  <input type="text" id="i_sex" name="i_sex" required /><br />
+  <label for="i_age">Age:</label><br>
+  <input type="text" id="i_age" name="i_age"><br>
 
-  <label for="i_email">Email:</label><br />
-  <input type="text" id="i_email" name="i_email" required /><br />
+  <label for="i_sex">Sex:</label><br>
+  <input type="text" id="i_sex" name="i_sex"><br>
+
+  <label for="i_email">Email:</label><br>
+  <input type="text" id="i_email" name="i_email"><br>
 
   <button id="registerBtn" style="font-size: 20px; padding: 15px 40px; margin-top: 50px;">
     REGISTER
-  </button>
-</form>
+    </button>
+  </form>
+</div>
 
   <script type="module" src="reg.mjs"></script>
 
