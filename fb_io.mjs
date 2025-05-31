@@ -128,12 +128,12 @@ function fb_authenticate() {
         console.log(fb_data);
 
             // Successful read for ADMIN
-        sessionStorage.setItem('admin', 'your a admin');
+        sessionStorage.setItem('admin', 'y');
         window.location.href = "select_game.html";
             }
             else {
             // Successful read but no REC found for ADMIN
-            sessionStorage.setItem('admin', 'your not a admin');
+            sessionStorage.setItem('admin', 'n');
             window.location.href = 'select_game.html';
                 }
         })
