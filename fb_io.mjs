@@ -140,7 +140,7 @@ function fb_authenticate() {
 
         .catch((error) => {
         // Read error for ADMIN
-            console.log(error);
+            console.error(error);
      });
 
     /******************************************************/
@@ -153,7 +153,7 @@ function fb_authenticate() {
 
         .catch((error) => {
             // Read error for USERDETAILS
-             console.log(error);
+             console.error(error);
         });
     })
 }
@@ -189,7 +189,7 @@ function fb_detectLogin() {
 
     (error) => {
     // Code for an onAuthStateChanged error goes here
-    console.log(error);
+    console.error(error);
     });
 }
 
@@ -213,7 +213,7 @@ function fb_logout() {
     })
     .catch((error) => {
     // Code for a logout error
-    console.log(error);
+    console.error(error);
     });
  }
 
@@ -235,7 +235,7 @@ function fb_writerecord(userDetails) {
 
         window.location.href = 'select_game.html';
     }).catch((error) => {
-        console.log(error);
+        console.error(error);
     });
 }
 
@@ -266,7 +266,7 @@ function fb_readrecord() {
         }
     }).catch((error) => {
         // Code for a read error goes here
-        console.log(error);
+        console.error(error);
     });
 }
 
