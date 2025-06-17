@@ -15,7 +15,7 @@ var FB_GAMEDB;
 var FB_GAMEAUTH;
 
 let userDetails = {
-    gameName: 'n/a',
+    displayName: 'n/a',
     email: 'n/a',
     photoURL: 'n/a',
     uid: 'n/a',
@@ -96,14 +96,14 @@ function fb_authenticate() {
     .then((result) => {
         // Code for a successful authentication
 
-        userDetails.gameName = result.user.gameName;
+        userDetails.displayName = result.user.displayName;
         userDetails.email = result.user.email;
         userDetails.photoURL = result.user.photoURL;
         userDetails.uid = result.user.uid;
         console.log(userDetails); //DIAG
 
          //sessionStorage.setItem (store session data)
-        sessionStorage.setItem('gameName', userDetails.gameName );
+        sessionStorage.setItem('displayName', userDetails.displayName );
         sessionStorage.setItem('email',  userDetails.email );
         sessionStorage.setItem('photoURL', userDetails.photoURL );
         sessionStorage.setItem('uid', userDetails.uid );

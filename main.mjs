@@ -26,7 +26,6 @@ window.fb_readrecord = fb_readrecord;
 window.fb_writerecord = fb_writerecord;
 
 
-
 /**************************************************************/
 //   END OF CODE
 /**************************************************************/
