@@ -33,7 +33,8 @@ function getUserInput() {
       // Calling the write rec
       fb_writerecord(userDetails);
     } else {
-      console.log("Form is not valid!");
+     console.log('%c Form is not valid!', 'color: red; font-weight: bold; font-size: 16px;');
+
     }
 }
     

@@ -36,8 +36,14 @@
   <label for="i_age">Age:</label><br>
   <input type="number" id="i_age" name="i_age" min="1" max="100"><br>
 
-  <label for="i_sex">Sex:</label><br>
-  <input type="text" id="i_sex" name="i_sex"><br>
+ <label for="i_sex">Sex:</label><br>
+<select id="i_sex" name="i_sex" style="width: 100%; font-size: 16px; padding: 5px;" required>
+  <option value="">-- Please select --</option>
+  <option value="female">Female</option>
+  <option value="male">Male</option>
+  <option value="prefer not to say">Prefer not to say</option>
+</select><br>
+
 
   <label for="i_email">Email:</label><br>
   <input type="text" id="i_email" name="i_email"><br>
