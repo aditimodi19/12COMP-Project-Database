@@ -5,6 +5,10 @@
 // written by Aditi Modi term 1 2025
 /*******************************************************/
 
+import { fb_readrecord } from './fb_io.mjs';
+
+
+
 /*******************************************************/
 // variables()
 /*******************************************************/
@@ -336,7 +340,7 @@ window.preload = preload;
 window.draw = draw;
 window.setup = setup;
 
-window.read_record = read_record;
+window.read_record = fb_readrecord;
 
 
 /*******************************************************/
