@@ -848,7 +848,7 @@ function ad_enterEvent(_tableId) {
   // Listen for typing into a cell - display what is being typed into the cell.
   document.getElementById(_tableId).addEventListener("input", function(event) {
     let td = event.target;
-    while (td !== this && !td.matches("td")) {
+    while (td !== th is && !td.matches("td")) {
       td = td.parentNode;
     }
 

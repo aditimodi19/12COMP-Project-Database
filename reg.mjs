@@ -40,6 +40,11 @@ function getUserInput() {
     
 document.getElementById('registerBtn').onclick = getUserInput;
 
+/*******************************************************/
+// END OF APP
+/*******************************************************/
+
+
   
 
 

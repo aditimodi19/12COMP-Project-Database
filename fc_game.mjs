@@ -1,12 +1,16 @@
 /*******************************************************/
-// fc_game.js
+// fc_game.mjs
 // fruit catcher
 // A simple game where you move the basket to catch the falling fruits
 // written by Aditi Modi term 1 2025
 /*******************************************************/
 
-import { fb_readrecord } from './fb_io.mjs';
+/**************************************************************/
+// Import all the constants & functions required from the fb_io module
 
+import { fb_initialise, fb_readrecord, fb_writeScore } from './fb_io.mjs';
+fb_initialise();
+/**************************************************************/
 
 
 /*******************************************************/
@@ -273,6 +277,17 @@ function gameOverScreen() {
     //imageMode(CENTER, TOP);
     image(gameOverImage, width / 2 - gameOverImage.width / 2 + 70, 80);
     allSprites.remove();
+
+   const uid = sessionStorage.getItem("uid");
+
+const scoreRecord = {
+  uid: uid,
+  score: score
+};
+
+console.log("Saving score:", scoreRecord); // DIAG
+fb_writeScore(scoreRecord);
+
    
     // Create the restart button
     restartButton = createButton('Restart');

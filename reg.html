@@ -30,14 +30,17 @@
 
 <div style="position: absolute; left: 40px; top: 129px; max-width: 300px; font-size: 20px;">
   <form id="f_userDetails" onsubmit="return false;">
+
   <label for="i_displayName">displayName:</label><br>
-  <input type="text" id="i_displayName" name="i_displayName"><br>
+  <input type="text" id="i_displayName" name="i_displayName" pattern=".*[a-zA-Z]+.*" title="Must contain at least one letter please" required>
+
 
   <label for="i_age">Age:</label><br>
   <input type="number" id="i_age" name="i_age" min="1" max="100"><br>
 
  <label for="i_sex">Sex:</label><br>
 <select id="i_sex" name="i_sex" style="width: 100%; font-size: 16px; padding: 5px;" required>
+
   <option value="">-- Please select --</option>
   <option value="female">Female</option>
   <option value="male">Male</option>
@@ -46,7 +49,8 @@
 
 
   <label for="i_email">Email:</label><br>
-  <input type="text" id="i_email" name="i_email"><br>
+  <input type="email" id="i_email" name="i_email" required>
+
 
   <button id="registerBtn" style="font-size: 20px; padding: 15px 40px; margin-top: 50px;">
     REGISTER
@@ -55,5 +59,9 @@
 </div>
 
   <script type="module" src="reg.mjs"></script>
+
+  <!--*************************************************************
+  END OF REG.HTML
+**************************************************************-->
 
    

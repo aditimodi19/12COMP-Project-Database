@@ -44,7 +44,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 /*************************4*************************************/
 export { 
     fb_initialise, fb_authenticate, fb_detectLogin, fb_logout,
-    fb_writerecord, fb_readrecord, userDetails }; 
+    fb_writerecord, fb_readrecord, fb_writeScore, userDetails }; 
 
 /******************************************************/
 // fb_initialise()
@@ -217,7 +217,7 @@ function fb_logout() {
     });
  }
 
- /******************************************************/
+/******************************************************/
 // fb_writerecord()
 // Called by html write record 
 // Write a specific record to the DB
@@ -235,6 +235,28 @@ function fb_writerecord(userDetails) {
 
         window.location.href = 'select_game.html';
     }).catch((error) => {
+        console.error(error);
+    });
+}
+
+
+/******************************************************/
+// fb_writeScore()
+// Called by html write record 
+// Save a score to the database under scores/fruitCatcher
+// Input:  record (with uid + score)
+// Return: n/a
+/******************************************************/
+function fb_writeScore(scoreRecord) {
+    console.log('%c fb_writeScore(): ', 
+        'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+
+     const dbReference = ref(FB_GAMEDB, 'scores/fc/' + scoreRecord.uid);
+    set(dbReference, scoreRecord).then(() => {
+        console.log('%c fb_writeScore(): score saved! ', 
+            'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+    })
+    .catch((error) => {
         console.error(error);
     });
 }
@@ -269,5 +291,3 @@ function fb_readrecord() {
         console.error(error);
     });
 }
-
-
