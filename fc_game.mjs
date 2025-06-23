@@ -32,6 +32,7 @@ let lives = MAXLIVES;
 var fruitGroup;
 let song;
 let restartButton;
+let leaderboardButton;
 let wallBot;
 
 /*******************************************************/
@@ -288,13 +289,21 @@ const scoreRecord = {
 console.log("Saving score:", scoreRecord); // DIAG
 fb_writeScore(scoreRecord);
 
-   
     // Create the restart button
     restartButton = createButton('Restart');
-    restartButton.position(width / 2 - 50, height / 2 + 200);  
+    restartButton.position(width / 2 - 220, height - 130);  
     restartButton.size(200, 60);
     restartButton.mousePressed(restartGame);
+
+     // Create the leaderboard button
+    leaderboardButton = createButton('Leaderboard');
+    leaderboardButton.position(width / 2 + 20, height - 130);  
+    leaderboardButton.size(200, 60);
+    leaderboardButton.mousePressed(() => {
+    window.location.href = 'leaderboard.html'; //direct to my leaderboard page
+});
 }
+
 
 /*******************************************************/
 // restartGame()
@@ -357,9 +366,6 @@ window.setup = setup;
 
 window.read_record = fb_readrecord;
 
-
 /*******************************************************/
 // END OF APP
 /*******************************************************/
-
-

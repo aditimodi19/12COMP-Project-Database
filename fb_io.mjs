@@ -230,11 +230,13 @@ function fb_writerecord(userDetails) {
 
     const dbReference = ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
     set(dbReference, userDetails).then(() => {
+         // Code for a successful write rec
         console.log('%c fb_writerecord(): successful! ', 
             'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 
         window.location.href = 'select_game.html';
     }).catch((error) => {
+         // Code for a write record error
         console.error(error);
     });
 }
@@ -257,6 +259,7 @@ function fb_writeScore(scoreRecord) {
             'color: ' + COL_C + '; background-color: ' + COL_B + ';');
     })
     .catch((error) => {
+        // Code for a write score error
         console.error(error);
     });
 }
@@ -291,3 +294,8 @@ function fb_readrecord() {
         console.error(error);
     });
 }
+
+
+/*******************************************************/
+// END OF APP
+/*******************************************************/
