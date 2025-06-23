@@ -63,7 +63,6 @@ console.log('%c ad_manager.mjs',
 // ENSURE THE PATH NAMES ARE CORRECT                                    //<=======
 const DETAILS = 'userDetails';                                          //<=======
 const FC      = 'scores/FC';  
-const                                       //<=======
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 // Import all external constants & functions required                   //<=MODULAR-API
@@ -848,7 +847,7 @@ function ad_enterEvent(_tableId) {
   // Listen for typing into a cell - display what is being typed into the cell.
   document.getElementById(_tableId).addEventListener("input", function(event) {
     let td = event.target;
-    while (td !== th is && !td.matches("td")) {
+    while (td !== this && !td.matches("td")) {
       td = td.parentNode;
     }
 
