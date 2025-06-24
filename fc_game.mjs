@@ -280,10 +280,13 @@ function gameOverScreen() {
     allSprites.remove();
 
    const uid = sessionStorage.getItem("uid");
+   const displayName = sessionStorage.getItem("displayName");
+
 
 const scoreRecord = {
   uid: uid,
-  score: score
+  score: score,
+  displayName: displayName
 };
 
 console.log("Saving score:", scoreRecord); // DIAG

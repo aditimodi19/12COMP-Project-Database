@@ -44,7 +44,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 /*************************4*************************************/
 export { 
     fb_initialise, fb_authenticate, fb_detectLogin, fb_logout,
-    fb_writerecord, fb_readrecord, fb_writeScore, userDetails };
+    fb_writerecord, fb_readrecord, fb_writeScore, fb_sortedread, userDetails };
 
 /******************************************************/
 // fb_initialise()
@@ -294,6 +294,47 @@ function fb_readrecord() {
         console.error(error);
     });
 }
+
+
+/******************************************************/
+// fb_sortedread()
+// Called by leaderboard.mjs to get scores in order
+// It does a sorted read-all from firebase and stores it into the dataArray
+// Input:  n/a
+// Return: n/a
+/******************************************************/
+function fb_sortedread() {
+    console.log('%c fb_sortedread(): ',
+        'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+
+    const scoresArray = [];
+
+    //query for displaying top 5 scores 
+    const dbReference = query(ref(FB_GAMEDB, "scores/fc"), orderByChild("score"),
+    limitToFirst(5)); //top 5 high scores
+
+    get(dbReference).then((snapshot) => {
+        if (snapshot.val() != null) {
+            // Successful read and there ARE records
+            snapshot.forEach(function(childSnapshot) {
+                let childData = childSnapshot.val();
+                childData.displayName = childData.displayName || "Anonymous";
+                scoresArray.push(childData);
+            });
+
+            console.log("Sorted Scores Array:", scoresArray);
+            // Successful read for sorted read
+            console.log('%c fb_sortedread(): successful!', 'color: ...');
+        } else {
+            console.log('no record found'); 
+        }
+    }).catch((error) => {
+        // Code for a sorted read error 
+        console.error(error);
+    });
+}
+
+
 
 
 /*******************************************************/
