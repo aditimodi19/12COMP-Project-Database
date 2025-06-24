@@ -101,8 +101,43 @@ h1 {
   border: 4px dotted #004d00; /* dark green */
 }
 
+    h2 {
+      text-align: center;
+      font-size: 40px;
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy, serif;
+    }
 
-  
+    .subtext {
+      position: absolute;
+      top: 90px;
+      left: 390px;
+      font-size: 40px;
+      font-family: Copperplate, 'Copperplate Gothic Light', fantasy, serif;
+    }
+
+    .form-box {
+      position: absolute;
+      left: 40px;
+      top: 129px;
+      max-width: 300px;
+      font-size: 20px;
+    }
+
+    .form-row {
+      margin-bottom: 20px;
+    }
+
+    input, select {
+      width: 100%;
+      font-size: 16px;
+      padding: 5px;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 15px 40px;
+      margin-top: 50px;
+    }
  
-    
 
+   

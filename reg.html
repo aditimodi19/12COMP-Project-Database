@@ -1,67 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>12COMP firebase</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>12COMP firebase</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- stylesheets -->
-    <link rel="stylesheet" type="text/css" href="https://www.w3schools.com/w3css/4/w3.css" />
-    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+  <!-- stylesheets -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="./css/style.css" />
 
-    <!-- firebase start ****************************************-->
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
-
-    <!-- firebase end ******************************************-->
-</head>
+  <!-- firebase start ****************************************-->
+  <link rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+  <!-- firebase end ******************************************-->
 
 <!--*************************************************************
   BODY
 **************************************************************-->
-<body style="height: 550px; margin: 0; background: linear-gradient(135deg,#97c2f0 , #d197f0); background-size: cover; background-repeat: no-repeat;">
-<h2 style="text-align: center; font-size: 40px; font-family: Copperplate, 'Copperplate Gothic Light', fantasy, serif;">
-  REGISTRATION FORM!
-</h2>
+<body style="margin: 0; min-height: 100vh; background: 
+linear-gradient(135deg, #97c2f0, #d197f0);">
+  <h2>REGISTRATION FORM!</h2>
 
- <div style="position: absolute; top: 90px; left: 390px; font-size: 40px; 
- font-family: Copperplate, 'Copperplate Gothic Light', fantasy, serif;">
-  Please enter in your details
-</div>
+  <div class="subtext">Please enter in your details</div>
 
-<div style="position: absolute; left: 40px; top: 129px; max-width: 300px; font-size: 20px;">
-  <form id="f_userDetails" onsubmit="return false;">
+  <div class="form-box">
+    <form id="f_userDetails" onsubmit="return false;">
+      <div class="form-row">
+        <label for="i_displayName">displayName:</label><br />
+        <input type="text" id="i_displayName" name="i_displayName" required />
+      </div>
 
-  <label for="i_displayName">displayName:</label><br>
-  <input type="text" id="i_displayName" name="i_displayName" pattern=".*[a-zA-Z]+.*" title="Must contain at least one letter please" required>
+      <div class="form-row">
+        <label for="i_age">Age:</label><br />
+        <input type="number" id="i_age" name="i_age" min="1" max="100" required />
+      </div>
 
+      <div class="form-row">
+        <label for="i_sex">Sex:</label><br />
+        <select id="i_sex" name="i_sex" required>
+          <option value="">-- Please select --</option>
+          <option value="female">Female</option>
+          <option value="male">Male</option>
+          <option value="prefer not to say">Prefer not to say</option>
+        </select>
+      </div>
 
-  <label for="i_age">Age:</label><br>
-  <input type="number" id="i_age" name="i_age" min="1" max="100"><br>
+      <div class="form-row">
+        <label for="i_email">Email:</label><br />
+        <input type="email" id="i_email" name="i_email" required />
+      </div>
 
- <label for="i_sex">Sex:</label><br>
-<select id="i_sex" name="i_sex" style="width: 100%; font-size: 16px; padding: 5px;" required>
-
-  <option value="">-- Please select --</option>
-  <option value="female">Female</option>
-  <option value="male">Male</option>
-  <option value="prefer not to say">Prefer not to say</option>
-</select><br>
-
-
-  <label for="i_email">Email:</label><br>
-  <input type="email" id="i_email" name="i_email" required>
-
-
-  <button id="registerBtn" style="font-size: 20px; padding: 15px 40px; margin-top: 50px;">
-    REGISTER
-    </button>
-  </form>
-</div>
+      <div style="text-align: center;">
+        <button id="registerBtn">REGISTER</button>
+      </div>
+    </form>
+  </div>
 
   <script type="module" src="reg.mjs"></script>
 
-  <!--*************************************************************
+<!--*************************************************************
   END OF REG.HTML
 **************************************************************-->
-
-   
+</body>
+</html>
