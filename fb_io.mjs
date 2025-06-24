@@ -44,7 +44,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 /*************************4*************************************/
 export { 
     fb_initialise, fb_authenticate, fb_detectLogin, fb_logout,
-    fb_writerecord, fb_readrecord, fb_writeScore, userDetails }; 
+    fb_writerecord, fb_readrecord, fb_writeScore, userDetails };
 
 /******************************************************/
 // fb_initialise()
