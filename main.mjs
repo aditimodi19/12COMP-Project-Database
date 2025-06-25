@@ -12,7 +12,7 @@ console.log('%c main.mjs',
 /**************************************************************/
 // Import all external constants & functions required
 /**************************************************************/
-// Import all the constants & functions required from fb_io module
+// Import all thez constants & functions required from fb_io module
 
 import {fb_initialise, fb_authenticate, fb_detectLogin, fb_logout, fb_readrecord
 , fb_writerecord } from './fb_io.mjs';

@@ -6,8 +6,8 @@
 // All variables & function begin with fb_  all const with FB_
 // Diagnostic code lines have a comment appended to them //DIAG
 /**************************** **********************************/
-const COL_C = 'white';	    // These two const are part of the coloured 	
-const COL_B = '#CD7F32';	//  console.log for functions scheme
+const COL_C = 'white';      // These two const are part of the coloured    
+const COL_B = '#CD7F32';    //  console.log for functions scheme
 console.log('%c fb_io.mjs',
     'color: blue; background-color: white;');
 
@@ -34,7 +34,6 @@ import { initializeApp }
 import { getDatabase, ref, set, get, update}
     from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
-    
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
     from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
@@ -42,7 +41,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 // EXPORT FUNCTIONS
 // List all the functions called by code or html outside of this module
 /*************************4*************************************/
-export { 
+export {
     fb_initialise, fb_authenticate, fb_detectLogin, fb_logout,
     fb_writerecord, fb_readrecord, fb_writeScore, fb_sortedread, userDetails };
 
@@ -70,8 +69,8 @@ function fb_initialise() {
     const FB_GAMEAPP = initializeApp(FB_GAMECONFIG);
     FB_GAMEDB = getDatabase(FB_GAMEAPP);
     FB_GAMEAUTH = getAuth(FB_GAMEAPP);
-    
-    console.info(FB_GAMEDB);      	//DIAG
+   
+    console.info(FB_GAMEDB);        //DIAG
 }
 
 /******************************************************/
@@ -82,9 +81,9 @@ function fb_initialise() {
 // Return: n/a
 /*****************************************************/
 function fb_authenticate() {
-    console.log('%c fb_authenticate(): ', 
+    console.log('%c fb_authenticate(): ',
        'color: ' + COL_C + '; background-color: ' + COL_B + ';');
-      
+     
     const AUTH = getAuth();
     const PROVIDER = new GoogleAuthProvider();
 
@@ -137,10 +136,10 @@ function fb_authenticate() {
             window.location.href = 'select_game.html';
                 }
         })
-
         .catch((error) => {
-        // Read error for ADMIN
-            console.error(error);
+       alert("Look at the console for an error message");
+       //read error for admin
+        console.error(error);
      });
 
     /******************************************************/
@@ -152,6 +151,7 @@ function fb_authenticate() {
     })
 
         .catch((error) => {
+            alert("Look at the console for an error message");
             // Read error for USERDETAILS
              console.error(error);
         });
@@ -166,7 +166,7 @@ function fb_authenticate() {
 // Return: n/a
 /******************************************************/
 function fb_detectLogin() {
-    console.log('%c fb_detectLogin(): ', 
+    console.log('%c fb_detectLogin(): ',
         'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 
     let fb_loginStatus = 'n/a';
@@ -175,19 +175,20 @@ function fb_detectLogin() {
     onAuthStateChanged(AUTH, (user) => {
     if (user) {
     // Code for user logged in goes here
-    console.log('%c fb_detectLogin(): logged IN', 
+    console.log('%c fb_detectLogin(): logged IN',
         'color: ' + COL_C + '; background-color: ' + COL_B + ';');
     } else {
 
     // Code for user logged out goes here
-    console.log('%c fb_detectLogin(): logged OUT', 
+    console.log('%c fb_detectLogin(): logged OUT',
         'color: ' + COL_C + '; background-color: ' + COL_B + ';');
     }
-    console.log('%c fb_detectLogin(): ' + fb_userLogin, 
-                'color: ' + COL_C + '; background-color: ' + COL_B + ';'); 
+    console.log('%c fb_detectLogin(): ' + fb_userLogin,
+                'color: ' + COL_C + '; background-color: ' + COL_B + ';');
     },
 
     (error) => {
+    alert("Look at the console for an error message");
     // Code for an onAuthStateChanged error goes here
     console.error(error);
     });
@@ -201,7 +202,7 @@ function fb_detectLogin() {
 // Return: n/a
 /******************************************************/
 function fb_logout() {
-    console.log('%c fb_logout(): ', 
+    console.log('%c fb_logout(): ',
         'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 
     const AUTH = getAuth();
@@ -212,6 +213,7 @@ function fb_logout() {
     console.log('%c fb_logout(): logout successful', 'color: ' + COL_C + '; background-color: ' + COL_B + ';');
     })
     .catch((error) => {
+    alert("Look at the console for an error message");
     // Code for a logout error
     console.error(error);
     });
@@ -219,46 +221,47 @@ function fb_logout() {
 
 /******************************************************/
 // fb_writerecord()
-// Called by html write record 
+// Called by html write record
 // Write a specific record to the DB
-// Input:  path and key to write to and the data to write 
+// Input:  path and key to write to and the data to write
 // Return: n/a
 /******************************************************/
 function fb_writerecord(userDetails) {
-    console.log('%c fb_writerecord(): ', 
+    console.log('%c fb_writerecord(): ',
         'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 
     const dbReference = ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
     set(dbReference, userDetails).then(() => {
          // Code for a successful write rec
-        console.log('%c fb_writerecord(): successful! ', 
+        console.log('%c fb_writerecord(): successful! ',
             'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 
         window.location.href = 'select_game.html';
     }).catch((error) => {
+        alert("Look at the console for an error message");
          // Code for a write record error
         console.error(error);
     });
 }
 
-
 /******************************************************/
 // fb_writeScore()
-// Called by html write record 
+// Called by html write record
 // Save a score to the database under scores/fruitCatcher
 // Input:  record (with uid + score)
 // Return: n/a
 /******************************************************/
 function fb_writeScore(scoreRecord) {
-    console.log('%c fb_writeScore(): ', 
+    console.log('%c fb_writeScore(): ',
         'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 
      const dbReference = ref(FB_GAMEDB, 'scores/fc/' + scoreRecord.uid);
     set(dbReference, scoreRecord).then(() => {
-        console.log('%c fb_writeScore(): score saved! ', 
+        console.log('%c fb_writeScore(): score saved! ',
             'color: ' + COL_C + '; background-color: ' + COL_B + ';');
     })
     .catch((error) => {
+    alert("Look at the console for an error message");
         // Code for a write score error
         console.error(error);
     });
@@ -272,7 +275,7 @@ function fb_writeScore(scoreRecord) {
 // Return: n/a
 /******************************************************/
 function fb_readrecord() {
-    console.log('%c fb_readrecord(): ', 
+    console.log('%c fb_readrecord(): ',
         'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 
     const dbReference= ref(FB_GAMEDB, 'userDetails/' + userDetails.uid);
@@ -282,7 +285,7 @@ function fb_readrecord() {
         console.log(fb_data);
 
         // Code for a successful read goes here
-        console.log('%c fb_readrecord(): successful!', 
+        console.log('%c fb_readrecord(): successful!',
             'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 
         } else {
@@ -290,11 +293,11 @@ function fb_readrecord() {
             console.log('no record found');
         }
     }).catch((error) => {
+    alert("Look at the console for an error message");
         // Code for a read error goes here
         console.error(error);
     });
 }
-
 
 /******************************************************/
 // fb_sortedread()
@@ -309,34 +312,40 @@ function fb_sortedread() {
 
     const scoresArray = [];
 
-    //query for displaying top 5 scores 
-    const dbReference = query(ref(FB_GAMEDB, "scores/fc"), orderByChild("score"),
-    limitToFirst(5)); //top 5 high scores
+    // query for displaying top 5 scores
+    const dbReference = query(ref(FB_GAMEDB, "scores/fc"), orderByChild("score"), limitToFirst(5));
 
-    get(dbReference).then((snapshot) => {
+    get(dbReference)
+    .then((snapshot) => {
         if (snapshot.val() != null) {
-            // Successful read and there ARE records
+            // successful read and there ARE records
             snapshot.forEach(function(childSnapshot) {
                 let childData = childSnapshot.val();
-                childData.displayName = childData.displayName || "Anonymous";
                 scoresArray.push(childData);
             });
 
-            console.log("Sorted Scores Array:", scoresArray);
             // Successful read for sorted read
-            console.log('%c fb_sortedread(): successful!', 'color: ...');
-        } else {
-            console.log('no record found'); 
+            console.log('%c fb_sortedread(): successful!', 'color: ' + COL_C + '; background-color: ' + COL_B + ';');
+
+            // To log the scores array
+            console.log('Scores:', scoresArray);
         }
-    }).catch((error) => {
+        else {
+            // Successful read BUT no records found
+            console.log('no record found');
+        }
+    })
+    .catch((error) => {
+    alert("Look at the console for an error message");
         // Code for a sorted read error 
         console.error(error);
     });
 }
 
-
-
-
 /*******************************************************/
 // END OF APP
 /*******************************************************/
+
+
+
+
