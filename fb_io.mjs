@@ -330,20 +330,39 @@ function fb_sortedread() {
             // To log the scores array
             scoresArray.reverse();
             console.log('Scores:', scoresArray);
-            
-        }
 
-        else {
+            // LOOP CONTROL LOGIC
+            let loopControl;
+            if (5 < scoresArray.length) {
+                loopControl = 5;
+            } else {
+                loopControl = scoresArray.length;
+            }
+
+            const leaderboardBody = document.getElementById("leaderboard"); // the tbody ID from my lb HTML
+            leaderboardBody.innerHTML = ""; // Clear old rows
+
+            for (let i = 0; i < loopControl; i++) {
+                leaderboardBody.innerHTML += `
+                    <tr>
+                        <td>${scoresArray[i].displayName}</td>
+                        <td>${scoresArray[i].score}</td>
+                    </tr>
+                  `;
+            }
+
+        } else {
             // Successful read BUT no records found
             console.log('no record found');
         }
     })
     .catch((error) => {
-    alert("Look at the console for an error message");
+        alert("Look at the console for an error message");
         // Code for a sorted read error 
         console.error(error);
     });
 }
+
 
 /*******************************************************/
 // END OF APP

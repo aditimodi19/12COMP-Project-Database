@@ -317,6 +317,7 @@ function restartGame() {
 
     //reset everything
     restartButton.remove();
+    leaderboardButton.remove();
     score = 0;  
     lives = MAXLIVES;  
     missedFruits = 0;

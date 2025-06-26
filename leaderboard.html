@@ -16,27 +16,37 @@
     LEADERBOARD!
   </h2>
 
-  <div class="w3-container" style="width: 80%; margin: 20px auto;">
-    <table class="w3-table-all w3-card-4 w3-white" id="leaderboardTable" style="font-size: 1.5em;">
-      <thead>
-        <tr class="lb-info">
-          <th>Player</th>
-          <th>Score</th>
-        </tr>
-      </thead>
-     <tbody id="leaderboardTableBody">
-  <tr><td id="p1name"></td><td id="p1score"></td></tr>
-  <tr><td id="p2name"></td><td id="p2score"></td></tr>
-  <tr><td id="p3name"></td><td id="p3score"></td></tr>
-  <tr><td id="p4name"></td><td id="p4score"></td></tr>
-  <tr><td id="p5name"></td><td id="p5score"></td></tr>
-</tbody>
+    <div id="leaderboardFooter" class="w3-center w3-blue w3-padding w3-round"
+     style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 1000;">
+    <button id="backHomeBtn" class="w3-button w3-white w3-round"
+      style="font-size: 18px; padding: 12px 24px; max-width: 90%; white-space: normal;">
+      ← Back to Fruit Catcher home page
+    </button>
+  </div>
 
-       
-    </table>
+  <div class="w3-container" style="width: 80%; margin: 20px auto;">
+   <table class="w3-table-all w3-card-4 w3-white" style="font-size: 1.5em; width: 100%;">
+  <thead>
+    <tr class="lb-info">
+      <th>Player</th>
+      <th>Score</th>
+    </tr>
+  </thead>
+  <tbody id="leaderboard">
+ 
+  </tbody>
+</table>
+
+    <!-- displaying the actual leaderboard data -->
+    <div id="leaderboard" style="margin-top: 10px;">
+      <p id="p0"></p>
+      <p id="p1"></p>
+      <p id="p2"></p>
+      <p id="p3"></p>
+      <p id="p4"></p>
+    </div>
   </div>
 
   <script type="module" src="leaderboard.mjs"></script>
 </body>
 </html>
- 

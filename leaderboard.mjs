@@ -18,6 +18,10 @@ fb_initialise();
 /*******************************************************/
 fb_sortedread();
 
+document.getElementById('backHomeBtn').onclick = () => {
+  window.location.href = 'fc_home.html';
+};
+
 
 /*******************************************************/
 // END OF APP
