@@ -7,7 +7,7 @@
 /**************************************************************/
 // Import all the constants & functions required from the fb_io module
 
-import { fb_initialise } from './fb_io.mjs';
+import { fb_initialise, fb_sortedread } from './fb_io.mjs';
 fb_initialise();
 /**************************************************************/
 
@@ -16,6 +16,7 @@ fb_initialise();
 // Leaderboard code goes here
 // 
 /*******************************************************/
+fb_sortedread();
 
 
 /*******************************************************/

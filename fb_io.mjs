@@ -31,7 +31,7 @@ let userDetails = {
 import { initializeApp }
     from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 
-import { getDatabase, ref, set, get, update}
+import { getDatabase, ref, set, get, update,  query, orderByChild, limitToFirst }
     from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged }
@@ -328,8 +328,11 @@ function fb_sortedread() {
             console.log('%c fb_sortedread(): successful!', 'color: ' + COL_C + '; background-color: ' + COL_B + ';');
 
             // To log the scores array
+            scoresArray.reverse();
             console.log('Scores:', scoresArray);
+            
         }
+
         else {
             // Successful read BUT no records found
             console.log('no record found');
